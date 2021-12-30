@@ -1,26 +1,26 @@
-# ===テニスゲーム===
+# ===テニスゲーム Tennis Game===
 テニスゲームが遊べます。
 
 製作者：しょうた
 
-# 使い方
+# 使い方 Usage
 遊び方.txtを読んでください。
 
-# ライセンス
+# ライセンス License
 MIT License (https://ja.wikipedia.org/wiki/MIT_License)
 
 使用しているフォント(Corporate-Logo-Rounded)のライセンスはSIL_Open_Font_License_1.1です。(http://scripts.sil.org/OFL)
 
-# 開発環境
+# 開発環境 Development Environment
 Python
 
-# バージョン
+# バージョン Version
 1.1.0
 
-# 最終更新日
+# 最終更新日 Last updated
 2021/12/30
 
-# ファイル名
+# ファイル名 File-Name
 tennis_game_ver.1.1.0.exe
 
 # 同梱ファイル
@@ -34,7 +34,7 @@ tennis_game_ver.1.1.0.exe
 https://github.com/shouta0224/tennis_game
 
 # 連絡先
-https://twitter.com/shoutarou0224
+[Twitter](https://twitter.com/shoutarou0224)
 
 # 動作条件
 Windows10
@@ -67,7 +67,7 @@ zipファイルを解凍して、中のtennis_game_ver.x.x.xフォルダを任�
 # アンインストール方法
 tennis_game_ver.x.x.xフォルダを削除する。
 
-# 免責事項
+# 免責事項 Disclaimer
 このソフトウェアはMIT Licenseの下で配布されています。このソフトウェアを使用する際はMIT Licenseを守って使ってください。
 自由に遊んだり動画撮ったりしてかまいません。
 このソフトウェアを使用したことによるいかなる責任も負いかねます。
