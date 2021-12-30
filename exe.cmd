@@ -1,0 +1,1 @@
+pyinstaller tennis_game.py --onefile --noconsole

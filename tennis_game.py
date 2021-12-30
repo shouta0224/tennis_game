@@ -51,11 +51,15 @@ def main():
         font_s_j = pygame.font.Font("font/Corporate-Logo-Rounded.ttf", 50)
     except:
         tkinter.messagebox.showerror("エラー", "フォントファイルがありません。")
+        pygame.quit()
+        sys.exit()
     tmr = 0
     try:
         title = pygame.image.load("png/title.png")
     except:
         tkinter.messagebox.showerror("エラー", "画像ファイルがありません。")
+        pygame.quit()
+        sys.exit()
     try:
         pygame.mixer.music.load("bgm/bgm.ogg")
         r_se = pygame.mixer.Sound("se/racket.ogg")
@@ -64,6 +68,8 @@ def main():
         o_se = pygame.mixer.Sound("se/game_over.ogg")
     except:
         tkinter.messagebox.showerror("エラー", "オーディオ機器が接続されていないか、音声ファイルがありません。")
+        pygame.quit()
+        sys.exit()
     while True:
         tmr = tmr + 1
         for event in pygame.event.get():
