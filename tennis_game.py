@@ -21,6 +21,7 @@ r_s_y = 10
 b_s = 15
 b_muki = 0
 b_hayasa = 5
+b_hayasa_s = 5
 old_fnt = ("Times New Roman", 24)
 mb = 0
 lu_k = 1800 #1800
@@ -36,6 +37,8 @@ time = 0
 jama_x = 0
 jama_y = 0
 jama_m = 0
+
+debug = 0 # デバッグモード=1
 
 def mouse_move(e):
     global m_x
@@ -77,6 +80,8 @@ def main():
         sys.exit()
     while True:
         tmr = tmr + 1
+        K = 0
+        J = 0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -89,7 +94,11 @@ def main():
                     else:
                         screen =pygame.display.set_mode((1280, 720))
                         full_s = 0
-
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_k:
+                    K = 1
+                if event.key == pygame.K_j:
+                    J = 1
         m_x, m_y = pygame.mouse.get_pos()
         key = pygame.key.get_pressed()
 
@@ -136,10 +145,16 @@ def main():
             
             pygame.draw.rect(screen, RED, [m_x-r_s_x, r_y, r_s_x*2, r_s_y*2])
             pygame.draw.circle(screen, GREEN, [b_x, b_y], b_s)
-            if diffculty >= 1 or (diffculty == 0 and level == 2):
+            if diffculty >= 1 or (diffculty == 0 and level >= 2):
                 pygame.draw.rect(screen, RED, [jama_x-r_s_x, jama_y, r_s_x*2, r_s_y*2])
             score_h = font_s_j.render("タイム:"+str(int(tmr/60))+"　点数:"+str(score)+"　レベル:"+str(level), True, BLACK)
             screen.blit(score_h, [10, 10])
+
+            if debug == 1:
+                if K == 1:
+                    level = level + 1
+                elif J == 1:
+                    level = level - 1
             
             if b_muki == 0: #右下
                 b_x = b_x + b_hayasa + muki_x_r
@@ -181,7 +196,7 @@ def main():
                             elif r == 2:
                                 muki_y_r = random.randint(-3, 3)
                         r_se.play()
-                if diffculty >= 1 or (diffculty == 0 and level == 2):
+                if diffculty >= 1 or (diffculty == 0 and level >= 2):
                     if b_y >= jama_y - r_s_y and b_y <= jama_y + r_s_y:
                         if b_x >= jama_x-r_s_x and b_x <= jama_x+r_s_x-180:
                             b_muki= 3
@@ -244,7 +259,7 @@ def main():
                             elif r == 2:
                                 muki_y_r = random.randint(-3, 3)
                         r_se.play()
-                if diffculty >= 1 or (diffculty == 0 and level == 2):
+                if diffculty >= 1 or (diffculty == 0 and level >= 2):
                     if b_y >= jama_y - r_s_y and b_y <= jama_y + r_s_y:
                         if b_x >= jama_x-r_s_x+180 and b_x <= jama_x+r_s_x:
                             b_muki= 2
@@ -289,7 +304,7 @@ def main():
                             muki_x_r = random.randint(-3, 3)
                         elif r == 2:
                             muki_y_r = random.randint(-3, 3)
-                if diffculty >= 1 or (diffculty == 0 and level == 2):
+                if diffculty >= 1 or (diffculty == 0 and level >= 2):
                     if b_y <= jama_y + r_s_y and b_y >= jama_y - r_s_y: #邪魔者の処理
                         if b_x >= jama_x - r_s_x and b_x <= jama_x - r_s_x + 20: #角
                             b_muki = 1
@@ -334,7 +349,7 @@ def main():
                             muki_x_r = random.randint(-3, 3)
                         elif r == 2:
                             muki_y_r = random.randint(-3, 3)
-                if diffculty >= 1 or (diffculty == 0 and level == 2):
+                if diffculty >= 1 or (diffculty == 0 and level >= 2):
                     if b_y <= jama_y + r_s_y and b_y >= jama_y - r_s_y: #邪魔者の処理
                         if b_x >= jama_x - r_s_x and b_x <= jama_x - r_s_x + 20: #角
                             b_muki = 0
@@ -361,10 +376,12 @@ def main():
                 screen.blit(lu, [1000, 10])
                 level = level + 1
                 l_se.play()
-                b_hayasa = b_hayasa + lu_d
+#                b_hayasa = b_hayasa + lu_d
             if tmr % lu_k > 1 and tmr % lu_k < 300 and tmr > 300:
                 lu = font_s_j.render("スピードアップ！", True, BLACK)
+                level = level + 1
                 screen.blit(lu, [1000, 10])
+            b_hayasa = b_hayasa_s + (lu_d * level)
             if tmr ==5184000:
                 l_se.play()
                 idx = 4
@@ -373,12 +390,12 @@ def main():
                 jama_x = jama_x - 10
                 if jama_x <= 0:
                     jama_m = 1
-                    jama_y = random.randint(10, 500)
+                    jama_y = random.randint(10, 400)
             else:
                 jama_x = jama_x + 10
                 if jama_x >= 1280:
                     jama_m = 0
-                    jama_y = random.randint(10, 500)
+                    jama_y = random.randint(10, 400)
         elif idx == 3: #gameover
             pygame.mixer.music.stop()
             screen.fill(BLACK)
