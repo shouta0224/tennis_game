@@ -49,7 +49,7 @@ def r_btn():
     idx = 0
 
 def main():
-    global b_x, b_y, b_muki, idx, mb, muki_x_r, muki_y_r, r, score, diffculty, level, full_s, time, jama_x, jama_y, jama_m
+    global b_x, b_y, b_muki, idx, mb, muki_x_r, muki_y_r, r, score, diffculty, level, full_s, time, jama_x, jama_y, jama_m, b_hayasa
     pygame.init()
     pygame.display.set_caption("Tennis Game")
     screen = pygame.display.set_mode((1280, 720))
@@ -377,10 +377,7 @@ def main():
                 level = level + 1
                 l_se.play()
 #                b_hayasa = b_hayasa + lu_d
-            if tmr % lu_k > 1 and tmr % lu_k < 300 and tmr > 300:
-                lu = font_s_j.render("スピードアップ！", True, BLACK)
-                level = level + 1
-                screen.blit(lu, [1000, 10])
+
             b_hayasa = b_hayasa_s + (lu_d * level)
             if tmr ==5184000:
                 l_se.play()
