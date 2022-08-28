@@ -37,6 +37,8 @@ time = 0
 jama_x = 0
 jama_y = 0
 jama_m = 0
+speed_up = 0
+spu_tmp = 0
 
 debug = 0 # デバッグモード=1
 
@@ -49,7 +51,7 @@ def r_btn():
     idx = 0
 
 def main():
-    global b_x, b_y, b_muki, idx, mb, muki_x_r, muki_y_r, r, score, diffculty, level, full_s, time, jama_x, jama_y, jama_m, b_hayasa
+    global b_x, b_y, b_muki, idx, mb, muki_x_r, muki_y_r, r, score, diffculty, level, full_s, time, jama_x, jama_y, jama_m, b_hayasa, speed_up, spu_tmp
     pygame.init()
     pygame.display.set_caption("Tennis Game")
     screen = pygame.display.set_mode((1280, 720))
@@ -138,6 +140,8 @@ def main():
                 r_s_x = 100
             pygame.mixer.music.play(-1)
             pygame.mixer.music.set_volume(0.1)
+            speed_up = 0
+            spu_tmp = 0
             l_se.play()
             idx = 2
         elif idx == 2: #play
@@ -375,8 +379,15 @@ def main():
                 lu = font_s_j.render("スピードアップ！", True, BLACK)
                 screen.blit(lu, [1000, 10])
                 level = level + 1
+                speed_up = 1
+                spu_tmp = tmr
                 l_se.play()
 #                b_hayasa = b_hayasa + lu_d
+            if speed_up == 1:
+                lu = font_s_j.render("スピードアップ！", True, BLACK)
+                screen.blit(lu, [1000, 10])
+                if spu_tmp + 300 == tmr:
+                    speed_up = 0
 
             b_hayasa = b_hayasa_s + (lu_d * level)
             if tmr ==5184000:
@@ -412,13 +423,13 @@ def main():
                 idx = 0
         elif idx == 4: #
             screen.fill(BLACK)
-            go = font_b.render("!?!?!?!?!?", True, WHITE)
+            go = font_b.render("クリア！", True, WHITE)
             re = font_s_j.render("Rキーを押して戻る", True, WHITE)
             screen.blit(go, [430, 360])
             screen.blit(re, [480, 500])
             if mb == 0:
                 mb = 1
-                tkinter.messagebox.showinfo("!?!?!?!?", "24時間")
+                tkinter.messagebox.showinfo("クリア！", "24時間")
             
             if key[pygame.K_r] == 1:
                 idx = 0
